@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+ <head> 
+  <meta charset="UTF-8"> 
+  <title>Age of History 3 Release Timer</title> 
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.5.0/build/global/luxon.min.js"></script> 
+  <script>
+      const DateTime = luxon.DateTime;
+      let Time, Message, toDate, Day, Hour, Minute, Second;
+      
+      const Release = DateTime.fromObject({
+        year: 2024, 
+        month: 10,
+        day: 23
+      });
+      
+      function formatting(x) {
+        if(x.toString().length < 2) {
+          let y = "0" + x.toString()
+          return y;
+        };
+        return x;
+      };
+      
+      function sendMessage() {
+        Message = "D: " + Day + " H: " + Hour + " M: " + Minute + " S: " + Second;
+        
+        let x = document.getElementById("Timer");
+        x.textContent = Message;
+        
+        cycle();
+      };
+      
+      function cycle() {
+        Time = DateTime.now().setZone("Europe/Moscow");
+        
+        toDate = Release.minus({
+          days: Time.day,
+          hours: Time.hour,
+          minutes: Time.minute,
+          seconds: Time.second
+        });
+        
+        Day = formatting(toDate.day);
+        Hour = formatting(toDate.hour);
+        Minute = formatting(toDate.minute);
+        Second = formatting(toDate.second);
+        
+        setTimeout(sendMessage, 1000);
+      };
+      
+      cycle();
+  </script> 
+  <style>
+    h1 {
+      font-size: 100px;
+      text-align: center;
+    }  
+    #Timer {
+      font-size: 100px;
+      text-align: center;
+      color: red;
+    }
+  </style> 
+ </head> 
+ <body> 
+  <h1>Age of History 3 Release:</h1> 
+  <h1 id="Timer">D: 00 H: 00 M: 00 S: 00</h1>
+ </body>
+</html>
