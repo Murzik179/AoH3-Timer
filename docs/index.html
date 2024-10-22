@@ -13,7 +13,7 @@ Licence: GPL-3.0 -->
       const Release = DateTime.fromObject({
         year: 2024, 
         month: 10,
-        day: 23,
+        day: 24,
         hour: 14
       });
       
@@ -44,7 +44,7 @@ Licence: GPL-3.0 -->
           seconds: Time.second
         });
         
-        Day = formatting(toDate.day);
+        Day = formatting(toDate.day - 1);
         Hour = formatting(toDate.hour);
         Minute = formatting(toDate.minute);
         Second = formatting(toDate.second);
