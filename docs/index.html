@@ -10,11 +10,12 @@ Licence: GPL-3.0 -->
       const DateTime = luxon.DateTime;
       let Time, Message, toDate, Day, Hour, Minute, Second;
       
+      const XTime = DateTime.now().setZone("Europe/Berlin");
       const Release = DateTime.fromObject({
         year: 2024, 
         month: 10,
         day: 24,
-        hour: 14
+        hour: 15
       });
       
       function formatting(x) {
@@ -45,14 +46,22 @@ Licence: GPL-3.0 -->
         });
         
         Day = formatting(toDate.day - 1);
-        Hour = formatting(toDate.hour);
+        Hour = formatting(toDate.hour - 1);
         Minute = formatting(toDate.minute);
         Second = formatting(toDate.second);
         
-        setTimeout(sendMessage, 1000);
+        if (Time.plus({
+          days: 1
+        }) < Release) {
+          setTimeout(sendMessage, 1000);
+        };
       };
       
-      cycle();
+      if (XTime.plus({
+        days: 1
+      }) < Release) {
+        cycle();
+      };
   </script> 
   <style>
     h1 {
